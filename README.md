@@ -15,4 +15,7 @@ pod install
 xcodebuild -workspace ReproducerApp.xcworkspace -scheme ReproducerApp -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
 ```
 
-Expected: the app builds. Seen: Xcode builds the `React` Clang module for the Swift import with the target's warnings as errors, and it fails on nullability warnings in React-Core's public headers.
+Expected: the app builds. Seen: Xcode precompiles the Clang modules the Swift files import with the target's warnings as errors, and the build fails on warnings in React Native's own headers:
+
+- the default prebuilt core: the `React` module, on `RCTWebSocketModule.h:23` and `RCTReactTaggedView.h:29`;
+- built from source (`RCT_USE_PREBUILT_RNCORE=0 pod install`): the `React_RCTAppDelegate` module, on `RCTRedBox+Internal.h:17`, `RCTRedBox2Controller+Internal.h:20`, `RCTRedBox2ErrorParser+Internal.h:17` and `:41`, and `RCTUIConfiguratorProtocol.h:40`.
