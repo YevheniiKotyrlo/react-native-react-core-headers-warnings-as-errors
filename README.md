@@ -2,7 +2,7 @@
 
 React Native's reproducer template with two changes:
 
-- `ReproducerApp/package.json` uses the nightly built from `main`, `react-native@0.89.0-nightly-20261031-e57dcb3cc`, and the `@react-native/*` packages of the same nightly. The template's `yarn.lock` is removed, since it pinned 0.88.1.
+- `ReproducerApp/package.json` uses the nightly built from `main`, `react-native@0.89.0-nightly-20261031-e57dcb3cc`, and the `@react-native/*` packages of the same nightly. `main` no longer ships `react-native.config.js`, so the app takes `@react-native-community/cli@21.0.0-alpha.1`, which registers the iOS and Android platforms itself, in place of 20.2.0 and its two platform packages. The template's `yarn.lock` is removed, since it pinned 0.88.1.
 - The app target sets `SWIFT_TREAT_WARNINGS_AS_ERRORS = YES` (`ReproducerApp/ios/ReproducerApp.xcodeproj/project.pbxproj`, Debug and Release). The template's `SceneDelegate.swift` already has `import React`.
 
 ## Steps
